@@ -2,14 +2,14 @@ import os
 from dotenv import load_dotenv
 from google import genai
 
-# Load secret environment variables from .env file
+
 load_dotenv()
 
-# Initialize Gemini Client using your free API key
+
 client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 
 
-# STEP 1: The AI Call (Single Classification Prompt)
+
 def classify_delay_severity(incident_report: str) -> str:
     """
     Sends the late package report to Gemini ONCE to categorize it.
@@ -26,7 +26,7 @@ def classify_delay_severity(incident_report: str) -> str:
     Respond ONLY with the single category string (MINOR_DELAY, MODERATE_DELAY, or CRITICAL_DELAY). Do not add extra text.
     """
     
-    # Active Gemini 3.5 model for newly created API keys
+    
     response = client.models.generate_content(
         model="gemini-3.5-flash-lite",
         contents=prompt
@@ -34,7 +34,7 @@ def classify_delay_severity(incident_report: str) -> str:
     return response.text.strip()
 
 
-# STEP 2: Plain, Testable Python Code Actions (No AI involved here!)
+
 def handle_minor_delay(report: str):
     print("--------------------------------------------------")
     print("🟢 [CATEGORY]: MINOR_DELAY")
@@ -57,7 +57,7 @@ def handle_critical_delay(report: str):
     print("--------------------------------------------------")
 
 
-# STEP 3: Execution Flow
+
 if __name__ == "__main__":
     sample_report = "Shipment #SR-809 carrying organ transport coolers is delayed by 4 hours due to track signaling failure near Station B."
     
